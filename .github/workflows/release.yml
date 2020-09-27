@@ -3,7 +3,7 @@ name: Release
 on:
     push:
         tags:
-            - actionv2
+            - 'v*'
 
 #        branches:
 #            - actionv2
