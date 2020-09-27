@@ -35,17 +35,7 @@ jobs:
             - name: Patch the Hauppauge source to get it working
               run: |
                 cd ${GITHUB_WORKSPACE}/src/Hauppauge/HauppaugeUSB/Hauppauge
-                for fl in 01-NewLine.patch \
-                    02-string.patch \
-                    03-EnableRegisteredParameters.patch \
-                    04-SplitLoggingLevels.patch \
-                    05-FirmwareLocation.patch \
-                    06-AVOutputCallback.patch \
-                    07-ThreadName.patch \
-                    08-AudioCS8416.patch
-                do
-	                patch -p1 "../HauppaugeUSB/Patches/${fl}"
-                done
+                ../HauppaugeUSB/Patches/apply_patches.sh
 
             - name: Rename Common/Rx/ADV7842/Wrapper.c to Wrapper.cpp so it can include c++ headers
               run: |
