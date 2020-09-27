@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 for fl in 01-NewLine.patch \
     02-string.patch \
