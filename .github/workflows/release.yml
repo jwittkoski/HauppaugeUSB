@@ -12,9 +12,9 @@ jobs:
         runs-on: ubuntu-16.04
         steps:
             - name: Install deps
-              run: |
-                pwd
-                sudo apt-get install libboost-log-dev libboost-program-options-dev libusb-1.0-0-dev build-essential
+#              run: |
+#                pwd
+#                sudo apt-get install libboost-log-dev libboost-program-options-dev libusb-1.0-0-dev build-essential
 
             - name: Setup dirs
               run: |
@@ -34,14 +34,19 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v2
               with:
-                path: src/Hauppauge
+                path: src/Hauppauge/HauppaugeUSB
 
 # pwd after checkoout: /home/runner/work/HauppaugeUSB/HauppaugeUSB
+# Also GITHUB_WORKSPACE: /home/runner/work/HauppaugeUSB/HauppaugeUSB
 
             - name: Testing
               run: |
+                cd
+                pwd
+                echo "----------"
                 pwd
                 ls -R
                 echo "----------"
-                cd ~/src/Hauppuage
+                cd ~/src/Hauppauge
                 ls -R
+                echo "----------"
