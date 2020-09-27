@@ -33,7 +33,8 @@ jobs:
 
             - name: Checkout
               uses: actions/checkout@v2
-              path: src/Hauppauge
+              with:
+                path: src/Hauppauge
 
 # pwd after checkoout: /home/runner/work/HauppaugeUSB/HauppaugeUSB
 
@@ -41,5 +42,6 @@ jobs:
               run: |
                 pwd
                 ls -R
-    
-
+                echo "----------"
+                cd ~/src/Hauppuage
+                ls -R
