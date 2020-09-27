@@ -11,4 +11,6 @@ for fl in 01-NewLine.patch \
 do
     echo "Applying patch ${fl}"
     patch --verbose -p1 "../HauppaugeUSB/Patches/${fl}"
+    echo "RESULT: "
+    echo $?
 done
