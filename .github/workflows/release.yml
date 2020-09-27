@@ -48,6 +48,14 @@ jobs:
                 make
                 sudo make install
 
-            - name: Check
+            - name: Package
               run: |
-                ls -R /opt/Hauppauge/
+                mkdir  -p ${GITHUB_WORKSPACE}/release
+                cd ${GITHUB_WORKSPACE}/release
+                tar cvzf HauppaugeUSB.tar.gz /opt/Hauppauge
+
+            - name: Upload artifact
+              uses: actions/upload-artifact@v2
+              with:
+                name: HauppaugeUSB.tar.gz
+                path: ${GITHUB_WORKSPACE}/release/HauppaugeUSB.tar.gz
