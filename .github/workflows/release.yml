@@ -44,7 +44,7 @@ jobs:
 
             - name: Build
               run: |
-                cd ~/src/Hauppauge/HauppaugeUSB
+                cd ${GITHUB_WORKSPACE}/src/Hauppauge/HauppaugeUSB
                 make
                 sudo make install
 
