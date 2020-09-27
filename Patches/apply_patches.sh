@@ -9,8 +9,8 @@ for fl in 01-NewLine.patch \
     07-ThreadName.patch \
     08-AudioCS8416.patch
 do
-    echo "Applying patch ${fl}"
-    patch --verbose -p1 "../HauppaugeUSB/Patches/${fl}"
+    echo "Applying patch ../HauppaugeUSB/Patches/${fl}"
+    patch --verbose -p1 < "../HauppaugeUSB/Patches/${fl}"
     echo "RESULT: "
     echo $?
 done
