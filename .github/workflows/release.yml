@@ -11,7 +11,7 @@ jobs:
         name: Compile
         runs-on: ubuntu-16.04
         steps:
-            - name: Install deps
+#            - name: Install deps
 #              run: |
 #                pwd
 #                sudo apt-get install libboost-log-dev libboost-program-options-dev libusb-1.0-0-dev build-essential
