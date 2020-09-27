@@ -54,6 +54,11 @@ jobs:
                 cd ${GITHUB_WORKSPACE}/release
                 tar cvzf HauppaugeUSB.tar.gz /opt/Hauppauge
 
+            - name: View package
+              run: |
+                ls -la ${GITHUB_WORKSPACE}/release/
+                ls -la ${GITHUB_WORKSPACE}/release/HauppaugeUSB.tar.gz
+
             - name: Upload artifact
               uses: actions/upload-artifact@v2
               with:
