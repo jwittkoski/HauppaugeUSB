@@ -44,7 +44,7 @@ jobs:
                     07-ThreadName.patch \
                     08-AudioCS8416.patch
                 do
-	                patch -p1 "${GITHUB_WORKSPACE}/src/Hauppauge/HauppaugeUSB/Patches/${fl}"
+	                patch -p1 "../HauppaugeUSB/Patches/${fl}"
                 done
 
             - name: Rename Common/Rx/ADV7842/Wrapper.c to Wrapper.cpp so it can include c++ headers
