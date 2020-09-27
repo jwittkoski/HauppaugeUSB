@@ -3,7 +3,7 @@ name: Release
 on:
     push:
         branches:
-            - action_test
+            - actionv2
 
 # Push events to matching v*, i.e. v1.0, v20.15.10
 #on:
