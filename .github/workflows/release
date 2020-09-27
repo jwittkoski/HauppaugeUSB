@@ -1,0 +1,24 @@
+name: Release
+
+on:
+    push:
+        branches:
+            - action_test
+
+jobs:
+
+    compile:
+        name: Compile
+        runs-on: ubuntu-16.04
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+
+            - name: Install deps
+              run: |
+                apt-get install libboost-log-dev libboost-program-options-dev libusb-1.0-0-dev build-essential
+
+            - name: Testing
+              run: |
+                pwd
+    
