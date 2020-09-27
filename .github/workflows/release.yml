@@ -11,24 +11,53 @@ jobs:
         name: Compile
         runs-on: ubuntu-16.04
         steps:
-#            - name: Install dependancies
-#              run: |
-#                pwd
-#                sudo apt-get install libboost-log-dev libboost-program-options-dev libusb-1.0-0-dev build-essential
+            - name: Install dependancies
+              run: |
+                sudo apt-get install libboost-log-dev libboost-program-options-dev libusb-1.0-0-dev build-essential
 
             - name: Grab the "driver" from Hauppauge
               run: |
                 mkdir -p ${GITHUB_WORKSPACE}/src/Hauppauge
                 cd ${GITHUB_WORKSPACE}/src/Hauppauge
                 curl -O https://s3.amazonaws.com/hauppauge/linux/hauppauge_hdpvr2_157321_patched_2016-09-26.tar.gz
-                #tar -xzf hauppauge_hdpvr2_157321_patched_2016-09-26.tar.gz
+                tar -xzf hauppauge_hdpvr2_157321_patched_2016-09-26.tar.gz
 
             - name: Checkout HauppaugeUSB repository
               uses: actions/checkout@v2
               with:
                 path: src/Hauppauge/HauppaugeUSB
 
-            - name: Testing
+            - name: Link the Hauppauge source tree
               run: |
-                cd ${GITHUB_WORKSPACE}
-                ls -R
+                cd ${GITHUB_WORKSPACE}/src/Hauppauge/HauppaugeUSB
+                ln -s ../hauppauge_hdpvr2_157321_patched_2016-09-26 Hauppauge
+
+            - name: Patch the Hauppauge source to get it working
+              run: |
+                cd ${GITHUB_WORKSPACE}/src/Hauppauge/HauppaugeUSB/Hauppauge
+                for fl in 01-NewLine.patch \
+                    02-string.patch \
+                    03-EnableRegisteredParameters.patch \
+                    04-SplitLoggingLevels.patch \
+                    05-FirmwareLocation.patch \
+                    06-AVOutputCallback.patch \
+                    07-ThreadName.patch \
+                    08-AudioCS8416.patch
+                do
+	                patch -p1 < ${GITHUB_WORKSPACE}/src/Hauppauge/HauppaugeUSB/Patches/"${fl}"
+                done
+
+            - name: Rename Common/Rx/ADV7842/Wrapper.c to Wrapper.cpp so it can include c++ headers
+              run: |
+                cd ${GITHUB_WORKSPACE}/src/Hauppauge/HauppaugeUSB/Hauppauge
+                mv Common/Rx/ADV7842/Wrapper.c Common/Rx/ADV7842/Wrapper.cpp
+
+            - name: Build
+              run: |
+                cd ~/src/Hauppauge/HauppaugeUSB
+                make
+                sudo make install
+
+            - name: Check
+              run: |
+                ls -R /opt/Hauppauge/
