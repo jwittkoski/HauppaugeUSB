@@ -13,12 +13,16 @@ jobs:
         steps:
             - name: Install deps
               run: |
+                pwd
                 sudo apt-get install libboost-log-dev libboost-program-options-dev libusb-1.0-0-dev build-essential
 
             - name: Setup dirs
               run: |
+                pwd
                 mkdir -p ~/src/Hauppauge
                 cd ~/src/Hauppauge
+                echo "${GITHUB_WORKSPACE}"
+                env
 
 #            - name: Download Hauppauge source
 #              run: |
@@ -29,12 +33,13 @@ jobs:
 
             - name: Checkout
               uses: actions/checkout@v2
+              path: src/Hauppauge
 
 # pwd after checkoout: /home/runner/work/HauppaugeUSB/HauppaugeUSB
 
             - name: Testing
               run: |
                 pwd
-                ls
+                ls -R
     
 
